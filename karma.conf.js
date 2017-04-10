@@ -17,6 +17,7 @@ module.exports = function(config) {
         files: [
             'node_modules/angular/angular.js',
             'node_modules/angular-mocks/angular-mocks.js',
+            'node_modules/angular-route/angular-route.js',
             'app/app.js',
             'app/controllers/*.js',
             'app/factories/*.js'
@@ -60,7 +61,7 @@ module.exports = function(config) {
         browsers: ['Chrome'],
 
 
-        // Continuous Integration mode  
+        // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
         singleRun: false,
 

@@ -1,0 +1,17 @@
+  <div ng-controller="ShoppingCart">
+    <h3>Select your snacks:</h3>
+
+    <div ng-repeat="model in snackList">
+        <label ng-bind="model.name"></label>
+        <input type="number" min="0" ng-model="model.quantity" ng-change="updateTotalCost()" />
+    </div>
+    <title>Welcome to the Paris Theater</title>
+    <p>
+        {{snackList}}
+    </p>
+
+    <p>
+        <label>Total Cost: {{totalCost}}</label>
+
+    </p>
+</div>
