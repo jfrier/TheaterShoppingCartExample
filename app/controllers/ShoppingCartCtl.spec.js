@@ -1,4 +1,4 @@
-describe("controller: ShoppingCartAdminCtl", function() {
+describe("controller: ShoppingCartCtl", function() {
 
     var ctl, rootScope;
 
@@ -8,7 +8,7 @@ describe("controller: ShoppingCartAdminCtl", function() {
 
     beforeEach(inject(function($rootScope, $controller) {
         var scope = $rootScope.$new();
-        ctl = $controller('ShoppingCartAdminCtl', {
+        ctl = $controller('ShoppingCartCtl', {
             $scope: scope
         });
     }));
