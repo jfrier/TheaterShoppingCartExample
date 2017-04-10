@@ -7,7 +7,6 @@ module.config(function($routeProvider) {
         })
         .when("/shoppingcart", {
           templateUrl: "../partials/shoppingcart.html"
-                  //controller : "ShoppingCart"
         })
         .when("/admin", {
             templateUrl: "../partials/admin.html"
