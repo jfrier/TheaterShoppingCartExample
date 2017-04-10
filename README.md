@@ -1,4 +1,4 @@
-global dependencies:</br>
+global node dependencies:</br>
 jasmine
 karma
 karma-jasmine
