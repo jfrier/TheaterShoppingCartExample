@@ -1,21 +1,28 @@
 describe("controller: ShoppingCartCtl", function() {
 
-    var ctl, rootScope;
+    var scope;
+    var ctl;
 
     beforeEach(angular.mock.module("TheaterShoppingCart"));
 
-    var $controller;
+    var snackFactory;
+    beforeEach(inject(function(_snackFactory_) {
+        snackFactory = _snackFactory_;
+        spyOn(snackFactory, 'getSnackList')
+    }));
 
-    beforeEach(inject(function($rootScope, $controller) {
-        var scope = $rootScope.$new();
-        ctl = $controller('ShoppingCartCtl', {
+    beforeEach(inject(function($controller, $rootScope) {
+        scope = $rootScope.$new();
+        Controller = $controller('ShoppingCartCtl', {
+            snackFactory: snackFactory,
             $scope: scope
         });
     }));
 
-    describe("Test setup", function() {
-        it("Test controller is resolved", function() {
-            expect(ctl).not.toBe(null);
+    describe("Controller method test", function() {
+        it("Test snack list is refreshed on route change", function() {
+            scope.$broadcast('$routeChangeUpdate');
+            expect(snackFactory.getSnackList).toHaveBeenCalled();
         });
     });
 });

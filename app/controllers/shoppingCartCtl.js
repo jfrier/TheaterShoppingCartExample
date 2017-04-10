@@ -8,6 +8,7 @@ module.controller("ShoppingCartCtl", ["$scope", "snackFactory", function($scope,
         $scope.totalCost = snackService.calculateTotalCost($scope.snackList);
     };
 
+    //update snack list on route change
     $scope.$on('$routeChangeUpdate', getSnackList);
 
     $scope.snackList = getSnackList();

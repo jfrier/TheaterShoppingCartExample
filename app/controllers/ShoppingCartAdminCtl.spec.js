@@ -1,21 +1,20 @@
 describe("controller: ShoppingCartAdminCtl", function() {
 
-    var ctl, rootScope;
+    var scope;
+    var ctl;
 
     beforeEach(angular.mock.module("TheaterShoppingCart"));
 
-    var $controller;
+    var snackFactory;
+    beforeEach(inject(function(_snackFactory_) {
+        snackFactory = _snackFactory_;
+    }));
 
-    beforeEach(inject(function($rootScope, $controller) {
-        var scope = $rootScope.$new();
-        ctl = $controller('ShoppingCartAdminCtl', {
+    beforeEach(inject(function($controller, $rootScope) {
+        scope = $rootScope.$new();
+        Controller = $controller('ShoppingCartAdminCtl', {
+            snackFactory: snackFactory,
             $scope: scope
         });
     }));
-
-    describe("Test setup", function() {
-        it("Test controller is resolved", function() {
-            expect(ctl).not.toBe(null);
-        });
-    });
 });
