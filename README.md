@@ -1,3 +1,9 @@
+global dependencies:</br>
+jasmine
+karma
+karma-jasmine
+http-server
+
 install all node packages for app:</br>
 npm install
 
