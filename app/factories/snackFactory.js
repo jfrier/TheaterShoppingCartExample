@@ -1,37 +1,12 @@
-module.factory("snackFactory", function() {
-    var snacks = [];
-
-    var quantityDiscounts = [{
-        "description": "5 for the price of 3",
-        "quantity": 5,
-        "adjustedQuantity": 3
-    }];
-
-    //intiialize the default snack values list
-    var init = function() {
-        snacks.push({
-            "name": "Popcorn",
-            "quantity": 0,
-            "cost": 3
-        });
-        snacks.push({
-            "name": "Snickers",
-            "quantity": 0,
-            "cost": 4,
-            "quantityDiscount": quantityDiscounts[0]
-        });
-        snacks.push({
-            "name": "Soda",
-            "quantity": 0,
-            "cost": 2
-        });
-    };
+module.factory("snackFactory", ["$http", function($http) {
+  "use strict";
 
     var calculateSnackCost = function(snack) {
 
         //compute total with quantity discount
         if (snack.hasOwnProperty("quantityDiscount")) {
-            return Math.floor(snack.quantity / snack.quantityDiscount.quantity) * (snack.cost * snack.quantityDiscount.adjustedQuantity) +
+            return Math.floor(snack.quantity / snack.quantityDiscount.quantity) *
+                (snack.cost * snack.quantityDiscount.adjustedQuantity) +
                 (snack.quantity % snack.quantityDiscount.quantity) * snack.cost;
         }
 
@@ -44,7 +19,7 @@ module.factory("snackFactory", function() {
     }
 
     var getSnackList = function() {
-        return snacks;
+        return $http.get('data/snacks.json');
     };
 
     var calculateTotalCost = function(snackList) {
@@ -56,11 +31,8 @@ module.factory("snackFactory", function() {
         return cost;
     };
 
-    //build the default snack list
-    init();
-
     return {
         "getSnackList": getSnackList,
         "calculateTotalCost": calculateTotalCost
     }
-});
+}]);

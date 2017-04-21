@@ -1,28 +1,35 @@
 describe("controller: ShoppingCartCtl", function() {
+  "use strict";
 
-    var scope;
-    var ctl;
+  var scope, ctl, q;
 
-    beforeEach(angular.mock.module("TheaterShoppingCart"));
+  beforeEach(angular.mock.module("TheaterShoppingCart"));
 
-    var snackFactory;
-    beforeEach(inject(function(_snackFactory_) {
-        snackFactory = _snackFactory_;
-        spyOn(snackFactory, 'getSnackList')
-    }));
+  var snackFactory;
+  beforeEach(inject(function($injector) {
+    snackFactory = $injector.get('snackFactory');
+    scope = $injector.get('$rootScope');
+    q = $injector.get('$q');
 
-    beforeEach(inject(function($controller, $rootScope) {
-        scope = $rootScope.$new();
-        Controller = $controller('ShoppingCartCtl', {
-            snackFactory: snackFactory,
-            $scope: scope
-        });
-    }));
+    var controller = $injector.get('$controller');
 
-    describe("Controller method test", function() {
-        it("Test snack list is refreshed on route change", function() {
-            scope.$broadcast('$routeChangeUpdate');
-            expect(snackFactory.getSnackList).toHaveBeenCalled();
-        });
+    ctl = controller('ShoppingCartCtl', {
+      snackFactory: snackFactory,
+      $scope: scope
     });
+  }));
+
+  describe("Controller method test", function() {
+    it("Test snack list is refreshed on route change", function() {
+
+      spyOn(snackFactory, 'getSnackList').and.callFake(function() {
+        var deferred = q.defer();
+        deferred.resolve([]);
+        return deferred.promise;
+      });
+
+      scope.$broadcast('$routeChangeUpdate');
+      expect(snackFactory.getSnackList).toHaveBeenCalled();
+    });
+  });
 });

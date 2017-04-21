@@ -1,7 +1,13 @@
 module.controller("ShoppingCartCtl", ["$scope", "snackFactory", function($scope, snackService) {
 
+    $scope.snackList = [];
+    $scope.totalCost = 0;
+
     var getSnackList = function() {
-        return snackService.getSnackList();
+        snackService.getSnackList()
+            .then(function(response) {
+                $scope.snackList = response.data;
+            });
     };
 
     $scope.updateTotalCost = function() {
@@ -11,6 +17,5 @@ module.controller("ShoppingCartCtl", ["$scope", "snackFactory", function($scope,
     //update snack list on route change
     $scope.$on('$routeChangeUpdate', getSnackList);
 
-    $scope.snackList = getSnackList();
-    $scope.totalCost = 0;
+    getSnackList();
 }])
