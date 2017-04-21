@@ -1,21 +1,22 @@
 module.controller("ShoppingCartCtl", ["$scope", "snackFactory", function($scope, snackService) {
+  "use strict";
 
-    $scope.snackList = [];
-    $scope.totalCost = 0;
+  $scope.snackList = [];
+  $scope.totalCost = 0;
 
-    var getSnackList = function() {
-        snackService.getSnackList()
-            .then(function(response) {
-                $scope.snackList = response.data;
-            });
-    };
+  var getSnackList = function() {
+    snackService.getSnackList()
+      .then(function(response) {
+        $scope.snackList = response.data;
+      });
+  };
 
-    $scope.updateTotalCost = function() {
-        $scope.totalCost = snackService.calculateTotalCost($scope.snackList);
-    };
+  $scope.updateTotalCost = function() {
+    $scope.totalCost = snackService.calculateTotalCost($scope.snackList);
+  };
 
-    //update snack list on route change
-    $scope.$on('$routeChangeUpdate', getSnackList);
+  //update snack list on route change
+  $scope.$on('$routeChangeUpdate', getSnackList);
 
-    getSnackList();
+  getSnackList();
 }])
