@@ -1,14 +1,14 @@
-global node dependencies:</br>
-jasmine
-karma
-karma-jasmine
-http-server
+global node dependencies:
+* jasmine
+* karma
+* karma-jasmine
+* http-server
 
-install all node packages for app:</br>
-npm install
+install all node packages for app:
+* npm install
 
-run unit tests:</br>
-karma start
+run unit tests:
+* karma start
 
-run app in browser: </br>
-http-server C:\location\to\app
+run app in browser:
+* http-server C:\location\to\app
